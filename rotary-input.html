@@ -1,0 +1,39 @@
+<!-- <template id="rotary-input-template"> -->
+    <style>
+        .rotary-input {
+            display: flex;
+            flex-direction: column;
+            width: 50px;
+        }
+        .title {
+            flex: 1;
+            align-self: center;
+            justify-self: center;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <div class="rotary-input">
+        <div class="title">
+            <slot name="title">Title</slot>
+        </div>
+        <div class="row">
+            <span>
+                <slot name="startLable">SL</slot>
+            </span>
+            <svg width="50" height="50">
+                <circle class="outer" cx="25" cy="35" r="15" />
+                <rect class="inner" width="3" height="5" x="25" y="20" />
+            </svg>
+            <span>
+                <slot name="endLable">EL</slot>
+            </span>
+        </div>
+    </div>
+<!-- </template> -->
+
+
+<!-- <rotary-input title="Pan" startAngle="-90" startValue="-1" startLable="L" endAngle="90" endValue="1" endLabel="R"
+    value="0" /> -->

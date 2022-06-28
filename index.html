@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <link rel="stylesheet" href="cssplay.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Roboto&family=Titillium+Web:wght@600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Heading 1</h1>
+    </header>
+    <main>
+        <style>
+            .rotary-input {
+                font-family: "Roboto", sans-serif;
+                font-size:x-small;
+                display: flex;
+                flex-direction: column;
+                width: 100px;
+                border: 1px solid darkgrey;
+                padding: 2px;
+                margin: 1em;
+            }
+
+            .rotary-input:hover {
+                border: 1px solid darkblue;
+            }
+
+            .title {
+                flex: 0 0 auto;
+                align-self: center;
+                justify-self: center;
+            }
+
+            .row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .row span {
+                display: flex;
+                width: 25px;
+            }
+
+            .row span:last-child {
+                justify-content: flex-end;
+            }
+
+            .knob {
+                stroke: darkgray;
+                stroke-width: 2;
+            }
+
+            .rotary-input:hover .knob {
+                stroke: rgba(0, 0, 0, 0.5);
+            }
+
+            .markings {
+                stroke: rgba(0, 0, 0, 0.2);
+                fill: none;
+                stroke-width: 3;
+                stroke-dasharray: 1 11.04277  1 11.04277 1 22.0851 1 11.04277 1 11.04277 1 11.04277 1 11.04277 1 11.04277
+            }
+
+            .highlight {
+                fill: none;
+                stroke-width: 2;
+                stroke-dasharray: 125.66 125.66;
+                stroke-dashoffset: 125.66
+            }
+
+            .marker {
+                fill: darkblue;
+            }
+        </style>
+        <div class="rotary-input" tabindex="1">
+            <div class="title">
+                <slot name="title">PAN</slot>
+            </div>
+            <div class="row">
+                <span>
+                    <slot name="startLabel">L</slot>
+                </span>
+                <svg width="50" height="50">
+                    <defs>
+                        <linearGradient id="knob">
+                            <stop offset="0%" stop-color="white" />
+                            <stop offset="100%" stop-color="grey" />
+                        </linearGradient>
+                        <linearGradient id="hring" x1="1" y1="0" x2="0" y2="1" gradientTransform="rotate(45)">
+                            <stop offset="0%" stop-color="green"></stop>
+                            <stop offset="47%" stop-color="red"></stop>
+                        </linearGradient>
+
+                    </defs>
+                    <circle class="knob" cx="25" cy="25" r="15" fill="url(#knob)" />
+                    <circle class="highlight" stroke="url(#hring)" cx="25" cy="25" r="20"
+                        transform="rotate(-90, 25, 25)" />
+                    <circle class="markings" cx="25" cy="25" r="23" />
+                    <rect class="marker" width="2" height="8" x="24.5" y="10" />
+                </svg>
+                <span>
+                    <slot name="endLabel">R</slot>
+                </span>
+            </div>
+
+        </div>
+        <div class="rotary-input" tabindex="2">
+            <div class="title">
+                <slot name="title">GAIN</slot>
+            </div>
+            <div class="row">
+                <span>
+                    <slot name="startLabel">-20</slot>
+                </span>
+                <svg width="50" height="50">
+                    <defs>
+                        <linearGradient id="linearColors2" x1="0" y1="0" x2="1" y2="1" gradientTransform="rotate(15)">
+                            <stop offset="5%" stop-color="red"></stop>
+                            <stop offset="50%" stop-color="yellow"></stop>
+                            <stop offset="95%" stop-color="green"></stop>
+                        </linearGradient>
+                    </defs>
+                    <circle class="knob" cx="25" cy="25" r="15" fill="url(#knob)" />
+                    <circle class="highlight" stroke="url(#linearColors2)" cx="25" cy="25" r="20"
+                        transform="rotate(-240, 25, 25)" />
+                    <circle class="markings" cx="25" cy="25" r="23" />
+                    <rect class="marker" width="2" height="8" x="24.5" y="10" />
+                </svg>
+                <span>
+                    <slot name="endLabel">+40</slot>
+                </span>
+            </div>
+
+        </div>
+        <!-- </template> -->
+
+
+        <!-- <rotary-input title="Pan" startAngle="-90" startValue="-1" startLabel="L" endAngle="90" endValue="1" endLabel="R"
+    value="0" /> -->
+    </main>
+    <footer>Made by Pete</footer>
+    <script type="module">
+        import { bindScrolling } from './cssplay.js';
+        const knobs = document.querySelectorAll('.rotary-input');
+        bindScrolling(knobs[0], { centred: true });
+        bindScrolling(knobs[1]);
+    </script>
+
+</body>
+
+</html>
